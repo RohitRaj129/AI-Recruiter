@@ -9,7 +9,7 @@ import { supabase } from "@/services/supabaseClient";
 import { useUser } from "@/app/provider";
 import { v4 as uuidv4 } from "uuid";
 
-function QuestionList({ formData }) {
+function QuestionList({ formData, onCreateLink }) {
   const [loading, setLoading] = useState(true);
   const [questionList, setQuestionList] = useState();
   const { user } = useUser();
@@ -54,7 +54,9 @@ function QuestionList({ formData }) {
       ])
       .select();
     setSaveLoading(false);
-    console.log(data);
+    toast("Interview Created Successfully! 🎉");
+
+    onCreateLink(interview_id);
   };
   return (
     <div>
@@ -82,7 +84,7 @@ function QuestionList({ formData }) {
           className="cursor-pointer"
         >
           {saveLoading && <Loader2 className="animate-spin" />}
-          Finish
+          Create Interview Link & Finish
         </Button>
       </div>
     </div>
