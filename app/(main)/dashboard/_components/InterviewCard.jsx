@@ -1,11 +1,11 @@
 "use client";
 import { Button } from "@/components/ui/button";
-import { Copy, Send } from "lucide-react";
+import { ArrowRight, Copy, Send } from "lucide-react";
 import moment from "moment";
 import React, { useState } from "react";
 import { toast } from "sonner";
 
-function InterviewCard({ interview }) {
+function InterviewCard({ interview, viewDetail = false }) {
   const url = process.env.NEXT_PUBLIC_HOST_URL + "/" + interview?.interview_id;
   const [copied, setCopied] = useState(false);
   const onCopyLink = async () => {
@@ -26,19 +26,32 @@ function InterviewCard({ interview }) {
         </h2>
       </div>
       <h2 className="mt-3 font-bold text-lg">{interview?.jobPosition}</h2>
-      <h2 className="mt-2">{interview?.duration}</h2>
-      <div className="grid grid-cols-2 gap-3 mt-5">
-        <Button
-          onClick={() => onCopyLink()}
-          variant={"outline"}
-          className={"w-full"}
-        >
-          <Copy /> {copied ? "Copied!" : "Copy Link"}
-        </Button>
-        <Button className={"w-full"} onClick={() => onSend()}>
-          <Send /> Send
-        </Button>
-      </div>
+      <h2 className="flex justify-between text-gray-500 mt-2">
+        {interview?.duration}
+        <span className="text-blue-400">
+          {interview["interview-feedback"]?.length} Candidates
+        </span>
+      </h2>
+      {!viewDetail ? (
+        <div className="grid grid-cols-2 gap-3 mt-5">
+          <Button
+            onClick={() => onCopyLink()}
+            variant={"outline"}
+            className={"w-full"}
+          >
+            <Copy /> {copied ? "Copied!" : "Copy Link"}
+          </Button>
+          <Button className={"w-full"} onClick={() => onSend()}>
+            <Send /> Send
+          </Button>
+        </div>
+      ) : (
+        <div className="w-full">
+          <Button className={"w-full mt-5"} variant={"outline"}>
+            View details <ArrowRight />
+          </Button>
+        </div>
+      )}
     </div>
   );
 }
