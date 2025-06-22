@@ -14,8 +14,8 @@ function StartInterview() {
   const { interviewInfo, setInterviewInfo } = useContext(InterviewDataContext);
   const vapi = new Vapi(process.env.NEXT_PUBLIC_VAPI_PUBLIC_KEY);
   const [activeUser, setActiveUser] = useState(false);
-  const [loading, setLoading] = useState();
-  const [conversation, setCovnersation] = useState();
+  const [loading, setLoading] = useState(false);
+  const [conversation, setConversation] = useState();
   const { interview_id } = useParams();
   const router = useRouter();
 
@@ -88,6 +88,8 @@ function StartInterview() {
   };
 
   const stopInterview = () => {
+    setLoading(true);
+    toast("Ending interview, please wait...");
     console.log("Stopping interview...");
     vapi.stop();
   };
@@ -103,7 +105,7 @@ function StartInterview() {
       if (message?.conversation) {
         const convoString = JSON.stringify(message?.conversation);
         console.log("Conversation string: ", convoString);
-        setCovnersation(convoString);
+        setConversation(convoString);
       }
     };
 

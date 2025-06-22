@@ -101,13 +101,13 @@ for hire or not with msg. Give me response in JSON format
 
         rating:{
 
-            techicalSkills:'',
+            techicalSkills:'7',
 
-            communication:'',
+            communication:'5',
 
-            problemSolving:'',
+            problemSolving:'6',
 
-            experince:''
+            experience:'7'
 
         },
 
