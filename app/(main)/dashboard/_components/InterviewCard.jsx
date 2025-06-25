@@ -2,6 +2,7 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Copy, Send } from "lucide-react";
 import moment from "moment";
+import Link from "next/link";
 import React, { useState } from "react";
 import { toast } from "sonner";
 
@@ -47,9 +48,13 @@ function InterviewCard({ interview, viewDetail = false }) {
         </div>
       ) : (
         <div className="w-full">
-          <Button className={"w-full mt-5"} variant={"outline"}>
-            View details <ArrowRight />
-          </Button>
+          <Link
+            href={`/scheduled-interview/${interview?.interview_id}/details`}
+          >
+            <Button className={"w-full mt-5"} variant={"outline"}>
+              View details <ArrowRight />
+            </Button>
+          </Link>
         </div>
       )}
     </div>

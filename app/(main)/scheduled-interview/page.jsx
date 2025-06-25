@@ -30,7 +30,7 @@ function ScheduledInterview() {
 
   return (
     <div className="mt-5">
-      <h2 className="text-lg font-bold">
+      <h2 className="text-xl font-bold">
         Interview List with candidate report and feedback
       </h2>
       {interviewList?.length == 0 && (
