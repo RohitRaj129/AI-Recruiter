@@ -111,9 +111,11 @@ for hire or not with msg. Give me response in JSON format
 
         },
 
-        summery:<in 3 Line>,
+        overallRating:'6.25',
 
-        Recommendation:'',
+        summary:{in 3 Line array},
+
+        Recommendation:'only Yes or No',
 
         RecommendationMsg:''
 
