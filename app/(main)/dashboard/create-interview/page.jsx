@@ -7,8 +7,10 @@ import FormContainer from "./_component/FormContainer";
 import QuestionList from "./_component/QuestionList";
 import { toast } from "sonner";
 import InterviewLink from "./_component/InterviewLink";
+import { useUser } from "@/app/provider";
 
 function CreateInterview() {
+  const { user } = useUser();
   const router = useRouter();
   const [step, setStep] = useState(1);
   const [formData, setFormData] = useState();
@@ -22,6 +24,13 @@ function CreateInterview() {
     console.log("FormData", formData);
   };
   const onGoToNext = () => {
+    // check whether the user have enough credits or not
+    if (user?.credits <= 0) {
+      toast(
+        "Looks like you're out of credits 😕. Please buy more to create a new interview."
+      );
+      return;
+    }
     if (
       !formData?.jobPosition ||
       !formData?.jobDescription ||

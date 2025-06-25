@@ -10,6 +10,8 @@ import { useUser } from "@/app/provider";
 import { v4 as uuidv4 } from "uuid";
 
 function QuestionList({ formData, onCreateLink }) {
+  // const userContext = useUser();
+  //   const user = userContext?.user;
   const [loading, setLoading] = useState(true);
   const [questionList, setQuestionList] = useState();
   const { user } = useUser();
@@ -53,6 +55,17 @@ function QuestionList({ formData, onCreateLink }) {
         },
       ])
       .select();
+
+    // update the user credits
+
+    const userUpdate = await supabase
+      .from("Users")
+      .update({ credits: Number(user?.credits) - 1 })
+      .eq("email", user?.email)
+      .select();
+
+    console.log("User Update", userUpdate);
+
     setSaveLoading(false);
     toast("Interview Created Successfully! 🎉");
 
