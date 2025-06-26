@@ -5,7 +5,6 @@ import {
   LayoutDashboard,
   List,
   Puzzle,
-  Settings,
   User2Icon,
   UserRoundCheck,
   WalletCards,
@@ -31,11 +30,6 @@ export const SideBarOptions = [
     name: "Billing",
     icon: WalletCards,
     path: "/billing",
-  },
-  {
-    name: "Settings",
-    icon: Settings,
-    path: "/settings",
   },
 ];
 
