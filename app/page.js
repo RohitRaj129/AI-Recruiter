@@ -62,7 +62,7 @@ export default function Home() {
               </a>
             </div>
             <div className="flex gap-2">
-              <Link href="/auth">
+              <Link href="/dashboard">
                 <Button className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 px-4 bg-[#025ce3] text-slate-50 text-sm font-bold leading-normal tracking-[0.015em]">
                   <span className="truncate">Get Started</span>
                 </Button>
@@ -100,7 +100,7 @@ export default function Home() {
                     </h2>
                   </div>
                   <div className="flex flex-wrap gap-3">
-                    <Link href="/auth">
+                    <Link href="/dashboard">
                       <Button className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 px-4 md:h-12 md:px-5 bg-[#025ce3] text-slate-50 text-sm font-bold leading-normal tracking-[0.015em] md:text-base md:font-bold md:leading-normal md:tracking-[0.015em]">
                         <span className="truncate">Get Started</span>
                       </Button>

@@ -2,7 +2,7 @@
 import { InterviewDataContext } from "@/context/InterviewDataContext";
 import { Loader2Icon, Mic, Phone, Timer } from "lucide-react";
 import Image from "next/image";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import Vapi from "@vapi-ai/web";
 import AlertConfirmation from "./_components/AlertConfirmation";
 import { toast } from "sonner";
@@ -15,7 +15,7 @@ function StartInterview() {
   const vapi = new Vapi(process.env.NEXT_PUBLIC_VAPI_PUBLIC_KEY);
   const [activeUser, setActiveUser] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [conversation, setConversation] = useState();
+  const conversationRef = useRef();
   const { interview_id } = useParams();
   const router = useRouter();
 
@@ -105,7 +105,7 @@ function StartInterview() {
       if (message?.conversation) {
         const convoString = JSON.stringify(message?.conversation);
         console.log("Conversation string: ", convoString);
-        setConversation(convoString);
+        conversationRef.current = convoString;
       }
     };
 
@@ -143,7 +143,7 @@ function StartInterview() {
 
   const GenerateFeedback = async () => {
     const res = await axios.post("/api/ai-feedback", {
-      conversation: conversation,
+      conversation: conversationRef.current,
     });
 
     console.log("Feedback Response:", res?.data);
