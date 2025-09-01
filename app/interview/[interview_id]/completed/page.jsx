@@ -1,131 +1,102 @@
-import React from "react";
-
-import { Home, ArrowRight } from "lucide-react";
+"use client";
+import React, { useContext } from "react";
+import Link from "next/link";
+import { InterviewDataContext } from "@/context/InterviewDataContext";
+import { Button } from "@/components/ui/button";
+import { MailCheck, UserCheck2, View } from "lucide-react";
 
 const InterviewComplete = () => {
+  const { interviewInfo } = useContext(InterviewDataContext);
+
   return (
-    <div className="bg-midnight text-white font-sans antialiased flex flex-col min-h-screen">
-      {/* Main Content */}
+    <div className="relative flex size-full min-h-screen flex-col group/design-root overflow-x-hidden bg-gradient-to-b from-primary-50 to-white">
+      <div className="layout-container flex h-full grow flex-col">
+        <main className="flex flex-1 justify-center px-4 py-12 sm:px-6 lg:px-8">
+          <div className="w-full max-w-4xl space-y-10">
+            <div className="text-center space-y-6">
+              <div className="flex justify-center">
+                <div className="bg-primary-100 rounded-full p-4 mb-4">
+                  <video
+                    src="/check.webm"
+                    autoPlay
+                    muted
+                    className="w-[75px] h-[75px]"
+                  />
+                </div>
+              </div>
+              <h1 className="text-4xl font-bold tracking-tight text-primary-900 sm:text-5xl">
+                Thank You for Completing Your Interview!
+              </h1>
+              <p className="mt-4 text-xl text-primary-700 max-w-2xl mx-auto">
+                We appreciate you taking the time to interview with us. Your
+                application is now under review, and we will be in touch soon.
+              </p>
+            </div>
 
-      <main className="flex-grow flex flex-col items-center justify-center space-y-8 py-16">
-        {/* Success Icon */}
+            <div className="rounded-xl border border-primary-200 bg-white p-8 shadow-lg">
+              <h2 className="text-2xl font-bold text-primary-900 mb-8">
+                Next Steps
+              </h2>
+              <div className="mt-6 grid grid-cols-1 gap-8 sm:grid-cols-3">
+                <div className="flex flex-col items-center gap-5 rounded-xl bg-gradient-to-b from-primary-50 to-white p-6 text-center border border-primary-100 shadow-sm transition-all duration-300 hover:shadow-md hover:-translate-y-1">
+                  <div className="flex h-14 w-14 items-center justify-center rounded-full bg-gradient-to-r from-primary-500 to-primary-600 shadow-lg">
+                    <View />
+                  </div>
+                  <div className="flex flex-col gap-2">
+                    <h3 className="text-lg font-bold text-primary-900">
+                      Review Process
+                    </h3>
+                    <p className="text-sm text-primary-700 leading-relaxed">
+                      Our team will carefully review your application and
+                      interview performance.
+                    </p>
+                  </div>
+                </div>
 
-        <div className="rounded-full bg-seaGreen p-4">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-12 w-12 text-white"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M5 13l4 4L19 7"
-            />
-          </svg>
-        </div>
+                <div className="flex flex-col items-center gap-5 rounded-xl bg-gradient-to-b from-primary-50 to-white p-6 text-center border border-primary-100 shadow-sm transition-all duration-300 hover:shadow-md hover:-translate-y-1">
+                  <div className="flex h-14 w-14 items-center justify-center rounded-full bg-gradient-to-r from-primary-500 to-primary-600 shadow-lg">
+                    <MailCheck />
+                  </div>
+                  <div className="flex flex-col gap-2">
+                    <h3 className="text-lg font-bold text-primary-900">
+                      Communication
+                    </h3>
+                    <p className="text-sm text-primary-700 leading-relaxed">
+                      We will keep you updated on the progress via email at{" "}
+                      <span className="font-medium text-primary-900">
+                        {interviewInfo?.userEmail}
+                      </span>
+                    </p>
+                  </div>
+                </div>
 
-        {/* Heading */}
+                <div className="flex flex-col items-center gap-5 rounded-xl bg-gradient-to-b from-primary-50 to-white p-6 text-center border border-primary-100 shadow-sm transition-all duration-300 hover:shadow-md hover:-translate-y-1">
+                  <div className="flex h-14 w-14 items-center justify-center rounded-full bg-gradient-to-r from-primary-500 to-primary-600 shadow-lg">
+                    <UserCheck2 />
+                  </div>
+                  <div className="flex flex-col gap-2">
+                    <h3 className="text-lg font-bold text-primary-900">
+                      Decision Timeline
+                    </h3>
+                    <p className="text-sm text-primary-700 leading-relaxed">
+                      You will receive a final decision within 2-3 business
+                      days.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
 
-        <h1 className="text-4xl font-bold text-center">Interview Complete!</h1>
-
-        {/* Subheading */}
-
-        <p className="text-lg text-gray-300 text-center">
-          Thank you for participating in the AI-driven interview with Alcruiter
-        </p>
-
-        {/* Image */}
-
-        <div className="rounded-xl overflow-hidden shadow-lg">
-          <img
-            src="https://www.svgrepo.com/show/508699/landscape-placeholder.svg"
-            alt="Interview Illustration"
-            className="w-full h-auto object-cover max-w-4xl"
-            style={{
-              backgroundImage: "url(https://i.imgur.com/g5B0C9N.png)",
-
-              backgroundSize: "cover",
-
-              backgroundPosition: "center",
-
-              width: "800px",
-
-              height: "400px",
-            }}
-          />
-        </div>
-
-        {/* Next Steps */}
-
-        <div className="bg-midnightLighter rounded-xl p-8 shadow-md w-full max-w-xl space-y-4">
-          <div className="flex items-center justify-center rounded-full bg-midnightLightest w-12 h-12 mx-auto">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-6 w-6 text-electricBlue"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"
-              />
-            </svg>
+            <div className="text-center pt-4">
+              <Link href="/dashboard">
+                <Button className="inline-flex min-w-[200px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-8 bg-gradient-to-r from-primary-500 to-primary-600 text-blue-500 text-base font-bold leading-normal tracking-[0.015em] hover:from-primary-600 hover:to-primary-700 transition-all duration-300 shadow-sm hover:shadow-md hover:-translate-y-0.5 hover:text-white">
+                  Return to Dashboard
+                </Button>
+              </Link>
+            </div>
           </div>
-
-          <h2 className="text-2xl font-semibold text-center">What's Next?</h2>
-
-          <p className="text-gray-300 text-center">
-            The recruiter will review your interview responses and will contact
-            you soon regarding the next steps.
-          </p>
-
-          <p className="text-gray-400 text-sm text-center">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-4 w-4 inline-block mr-1"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-              />
-            </svg>
-            Response within 2-3 business days
-          </p>
-        </div>
-
-        {/* Buttons */}
-
-        <div className="flex space-x-4">
-          <button className="bg-midnightLightest text-gray-300 hover:text-white rounded-lg py-3 px-6 flex items-center space-x-2 transition duration-300 ease-in-out">
-            <Home className="h-5 w-5" />
-
-            <span>Return to Homepage</span>
-          </button>
-
-          <button className="bg-electricBlue hover:bg-electricBlueDark text-white rounded-lg py-3 px-6 flex items-center space-x-2 transition duration-300 ease-in-out">
-            <span>View Other Opportunities</span>
-
-            <ArrowRight className="h-5 w-5" />
-          </button>
-        </div>
-      </main>
-
-      {/* Footer */}
-
-      <footer className="bg-midnightLighter text-gray-400 text-center py-4">
-        <p>&copy; 2023 Al Recruiter. All rights reserved.</p>
-      </footer>
+        </main>
+      </div>
     </div>
   );
 };

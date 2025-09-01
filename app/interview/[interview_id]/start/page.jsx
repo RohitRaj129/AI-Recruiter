@@ -1,9 +1,10 @@
 "use client";
 import { InterviewDataContext } from "@/context/InterviewDataContext";
-import { Loader2Icon, Mic, Phone, Timer } from "lucide-react";
+import { Loader2Icon, Mic, Phone } from "lucide-react";
 import Image from "next/image";
 import React, { useContext, useEffect, useRef, useState } from "react";
 import Vapi from "@vapi-ai/web";
+import Timer from "./_components/Timer";
 import AlertConfirmation from "./_components/AlertConfirmation";
 import { toast } from "sonner";
 import axios from "axios";
@@ -15,6 +16,7 @@ function StartInterview() {
   const vapi = new Vapi(process.env.NEXT_PUBLIC_VAPI_PUBLIC_KEY);
   const [activeUser, setActiveUser] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [isInterviewActive, setIsInterviewActive] = useState(false);
   const conversationRef = useRef();
   const { interview_id } = useParams();
   const router = useRouter();
@@ -89,6 +91,7 @@ function StartInterview() {
 
   const stopInterview = () => {
     setLoading(true);
+    setIsInterviewActive(false); // Stop the timer immediately
     toast("Ending interview, please wait...");
     console.log("Stopping interview...");
     vapi.stop();
@@ -114,6 +117,7 @@ function StartInterview() {
     vapi.on("call-start", () => {
       console.log("Voice conversation started");
       toast("Call connected successfully");
+      setIsInterviewActive(true);
     });
 
     vapi.on("speech-start", () => {
@@ -128,6 +132,7 @@ function StartInterview() {
     vapi.on("call-end", () => {
       console.log("Voice conversation ended");
       toast("Interview ended successfully");
+      setIsInterviewActive(false);
       GenerateFeedback();
     });
 
@@ -173,10 +178,7 @@ function StartInterview() {
     <div className="p-20 lg:px-48 xl:px-56">
       <h2 className="font-bold text-xl flex justify-between">
         AI Interview Session
-        <span className="flex gap-2 items-center">
-          <Timer />
-          00:00:00
-        </span>
+        <Timer isRunning={isInterviewActive} />
       </h2>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-7 mt-5">
         <div className="bg-white h-[400px] rounded-lg border flex flex-col gap-3 items-center justify-center">
@@ -208,16 +210,16 @@ function StartInterview() {
       </div>
       <div className="flex justify-center items-center gap-5 mt-10">
         <Mic className="h-12 w-12 p-3 bg-gray-500 text-white rounded-full cursor-pointer" />
-        {/* <AlertConfirmation stopInterview={() => stopInterview()}> */}
-        {!loading ? (
-          <Phone
-            className="h-12 w-12 p-3 bg-red-500 text-white rounded-full cursor-pointer"
-            onClick={() => stopInterview()}
-          />
-        ) : (
-          <Loader2Icon className="animate-spin" />
-        )}
-        {/* </AlertConfirmation> */}
+        <AlertConfirmation stopInterview={() => stopInterview()}>
+          {!loading ? (
+            <Phone
+              className="h-12 w-12 p-3 bg-red-500 text-white rounded-full cursor-pointer"
+              onClick={() => stopInterview()}
+            />
+          ) : (
+            <Loader2Icon className="animate-spin" />
+          )}
+        </AlertConfirmation>
       </div>
       <h2 className="text-sm text-gray-400 text-center mt-5">
         Interview is in Progress...
