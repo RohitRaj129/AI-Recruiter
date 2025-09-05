@@ -11,25 +11,35 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
 import { SideBarOptions } from "@/services/Constants";
-import { Plus } from "lucide-react";
+import { LogOut, Plus } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
+import { supabase } from "@/services/supabaseClient";
 
 export function AppSidebar() {
   const path = usePathname();
-  console.log(path);
+  const router = useRouter();
+
+  const handleLogout = async () => {
+    const { error } = await supabase.auth.signOut();
+    if (!error) {
+      router.push("/auth");
+    }
+  };
 
   return (
     <Sidebar>
       <SidebarHeader className="flex items-center mt-5">
-        <Image
-          src={"/logo.svg"}
-          alt="Logo"
-          width={200}
-          height={100}
-          className="w-[150px]"
-        />
+        <Link href={"/"}>
+          <Image
+            src={"/logo.svg"}
+            alt="Logo"
+            width={200}
+            height={100}
+            className="w-[150px]"
+          />
+        </Link>
         <Link href={"/dashboard/create-interview"}>
           <Button className="w-full mt-5">
             <Plus />
@@ -66,7 +76,16 @@ export function AppSidebar() {
           </SidebarContent>
         </SidebarGroup>
       </SidebarContent>
-      <SidebarFooter />
+      <SidebarFooter>
+        <Button
+          variant="ghost"
+          className="w-full flex items-center gap-2 p-5 hover:bg-blue-100"
+          onClick={handleLogout}
+        >
+          <LogOut className="h-5 w-5" />
+          <span className="text-[16px] font-medium">Logout</span>
+        </Button>
+      </SidebarFooter>
     </Sidebar>
   );
 }
