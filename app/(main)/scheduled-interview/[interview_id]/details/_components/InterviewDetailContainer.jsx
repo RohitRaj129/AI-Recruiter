@@ -9,6 +9,7 @@ import {
 } from "@/components/ui/accordion";
 
 function InterviewDetailContainer({ interviewDetail }) {
+  const questionList = interviewDetail?.questionList;
   return (
     <div className="p-5 bg-white mt-5 rounded-lg">
       <h2>{interviewDetail?.jobPosition}</h2>
@@ -54,15 +55,17 @@ function InterviewDetailContainer({ interviewDetail }) {
               Interview Questions
             </AccordionTrigger>
             <AccordionContent>
-              <div className="grid grid-cols-2 gap-3 mt-3">
-                {interviewDetail?.questionList.map((item, index) => (
-                  <div key={index}>
-                    <h2 className="text-xs">
-                      {index + 1}. {item?.question}
-                    </h2>
-                  </div>
-                ))}
-              </div>
+              {questionList && (
+                <div className="grid grid-cols-2 gap-3 mt-3">
+                  {questionList.map((item, index) => (
+                    <div key={index}>
+                      <h2 className="text-xs">
+                        {index + 1}. {item?.question}
+                      </h2>
+                    </div>
+                  ))}
+                </div>
+              )}
             </AccordionContent>
           </AccordionItem>
         </Accordion>

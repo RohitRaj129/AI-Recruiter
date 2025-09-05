@@ -26,7 +26,15 @@ function CandidateList({ candidateList }) {
             </div>
           </div>
           <div className="flex gap-3 items-center">
-            <h2 className="text-green-600">6/10</h2>
+            <h2
+              className={`${
+                candidate?.feedback?.feedback?.Recommendation == "No"
+                  ? "text-red-500"
+                  : "text-green-500"
+              }`}
+            >
+              {candidate?.feedback?.feedback?.overallRating}/10
+            </h2>
             <CandidateFeedbackDialog candidate={candidate} />
           </div>
         </div>

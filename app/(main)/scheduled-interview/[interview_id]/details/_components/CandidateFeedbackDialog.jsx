@@ -39,7 +39,9 @@ function CandidateFeedbackDialog({ candidate }) {
                   </div>
                 </div>
                 <div className="flex gap-3 items-center">
-                  <h2 className="text-primary text-2xl font-bold">6/10</h2>
+                  <h2 className="text-primary text-2xl font-bold">
+                    {feedback?.overallRating}/10
+                  </h2>
                 </div>
               </div>
               <div className="mt-5">

@@ -105,11 +105,11 @@ for hire or not with msg. Give me response in JSON format
 
         },
 
-        overallRating:'6.25',
+        overallRating:'technicalSkills + communication + problemSolving + experience / 4',
 
         summary:{in 3 Line array},
 
-        Recommendation:'only Yes or No',
+        Recommendation:'only Yes or No'(if overallRating > 6 then Yes else No),
 
         RecommendationMsg:''
 
