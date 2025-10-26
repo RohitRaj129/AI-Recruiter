@@ -107,15 +107,7 @@ Our platform supports multiple languages, ensuring a global candidate pool and a
 1. Run `npm run test` or `yarn test` to run the tests.
 2. Open the Cypress dashboard at http://localhost:4444 to view test results and debug tests.
 
-📸 Screenshots
 --------------
-
-[Insert screenshots of the application]
-
-📦 API Reference
-----------------
-
-[Insert API reference documentation]
 
 👤 Author
 ---------
